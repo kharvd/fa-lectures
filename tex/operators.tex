@@ -1,0 +1,141 @@
+\section{Ограниченные операторы}
+
+Далее $X$ и $Y$ --- нормированные пространства над полем $\fieldk \in \menge{\fieldr,
+\fieldc}$.
+
+\begin{definition}
+    Отображение $A \colon X \to Y$ называется \emph{линейным оператором}, действующим
+    из пространства $X$ в $Y$, если
+    \[ A(\alpha x_1 + \beta x_2) = \alpha Ax_1 + \beta Ax_2, \quad \forall x_1,
+    x_2 \in X, \alpha, \beta \in \fieldk. \]
+\end{definition}
+
+Если $Y = \fieldk$, то вместо слова <<оператор>> говорят <<функционал>>.
+
+\begin{example}
+    Отображение $D \colon C^1[a, b] \to C[a, b]$, определённое по правилу
+    $Dx = x'$ называется \emph{оператором дифференцирования}. Это линейный
+    оператор.
+\end{example}
+
+\begin{example}
+    Отображение $J \colon C[a, b] \to C[a, b]$, определённое по правилу
+    \[ (Jx)(t) = \int_{a}^t x(s) \dd s, \quad t \in [a, b], \]
+    назывется \emph{оператором неопределённого интегрирования.}
+\end{example}
+
+\begin{example}
+    Пусть $(\Omega, \mathcal F, \mu)$ --- пространство с мерой, $L^1(\Omega,
+    \mu)$ --- банахово пространство классов эквивалентности суммируемых функций
+    на $\Omega$. Отображение $J_0 \colon L^1(\Omega, \mu) \to \fieldr$,
+    определенное по правилу
+    \[ J_0 x = \int_\Omega x \dd \mu, \]
+    есть линейный функционал.
+\end{example}
+
+\begin{example}
+    Отображение $A \colon \ell^1 \to \ell^\infty$, определённое по правилу
+    \[ (Ax)(n) = \sum_{k=1}^n x(k), \]
+    есть линейный оператор, который каждой последовательности из $\ell^1$ ставит
+    в соответствие её последовательность частичных сумм.
+\end{example}
+
+\begin{example}
+    Отображение $A \colon C[a, b] \to C[a, b]$, определённое по правилу
+    \[ (Ax)(t) = \int_a^b K(t, s) x(s) \dd s, \quad t \in [a,b], \]
+    где $K : [a, b] \times [a, b] \to \fieldr$ --- непрерывная функция,
+    называется \emph{интегральным оператором}. При этом функция $K$ называется
+    \emph{ядром}
+    этого интегрального оператора.
+\end{example}
+
+\begin{definition}
+    Оператор $A \colon X \to Y$ между нормированными пространствами 
+    называется \emph{ограниченным}, если величина
+    \[ \norm{A} = \sup_{\norm{x} \leq 1} \norm{Ax} \]
+    конечна. Эта величина, в таком случае, называется нормой оператора $A$.
+\end{definition}
+
+Можно показать, что все следующие определения нормы совпадают с данным выше:
+\begin{enumerate}
+    \item $ \norm{A} = \sup\limits_{\norm{x} < 1} \norm{Ax} $
+    \item $ \norm{A} = \sup\limits_{\norm{x} = 1} \norm{Ax} $
+    \item $ \norm{A} = \sup\limits_{x\neq 0}\displaystyle\frac{\norm{Ax}}{\norm{x}}; $
+    \item $ \norm{A} = \inf\menge{C \geq 0 : \forall x \in X \; \norm{Ax} \leq C
+        \norm{x}} $
+\end{enumerate}
+
+Нетрудно видеть, что $\norm{Ax} \leq \norm{A}\norm{x}$ для всех $x \in X$.
+
+\begin{example}
+    Рассмотрим оператор умножения $A \colon \fieldc \to \fieldc$, $\\Ax = ax$,
+    где $a \in \fieldc$. Если $\norm{x} = \absv{x} = 1$, то 
+    \[ \norm{Ax} = \absv{ax} = \absv{a}. \]
+    Таким образом $\norm{A} = \absv{a}$.
+\end{example}
+
+Множество всех линейных ограниченных операторов между \\ нормированными
+пространствами $X$ и $Y$ будем обозначать $L(X, Y)$.
+
+\begin{theorem}
+    $L(X, Y)$ --- нормированное пространство.
+\end{theorem}
+
+\begin{proof}
+    Непосредственно доказывается, что сумма ограниченных
+    операторов есть ограниченный оператор. Также легко показать, что норма
+    оператора --- в самом деле норма в $L(X, Y)$. Установим, например,
+    справедливость неравенства треугольника. Пусть $A, B \in L(X, Y)$ и
+    $\norm{x} = 1$. Тогда
+    \[ \norm{(A+B)x} = \norm{Ax+Bx} \leq \norm{Ax} + \norm{Bx}. \]
+    Взяв верхнюю грань по всем $x$ с нормой $1$, получим, что 
+    \[ \norm{A + B} \leq \norm{A} + \norm{B}. \]
+\end{proof}
+
+\begin{theorem}
+    Если $Y$ --- банахово пространство, то $L(X, Y)$ --- банахово
+    пространство.
+\end{theorem}
+
+\begin{proof}
+   см. Антоневич, Радыно, 1984, с. 180. 
+\end{proof}
+
+\begin{definition}
+    Если $f \colon X \to \fieldk$ и $f$ --- линейный оператор,
+     то $f$ называют \emph{линейным функционалом} на $X$.
+
+    Пространство ограниченных линейных функционалов $L(X, \fieldk)$ называют
+    \emph{сопряженным пространством} к пространству $X$ и обозначают символом $X^*$.
+\end{definition}
+
+\begin{theorem}
+    Пусть $A \in L(X, Y)$. Тогда следующие условия эквивалентны:
+    \begin{enumerate}
+        \item $A$ --- непрерывное отображение;
+        \item $A$ --- непрерывное в точке $0$ отображение;
+        \item $A$ --- ограниченный оператор;
+        \item $A$ --- липшицево отображение.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Импликации $1 \Rightarrow 2$, и $4 \Rightarrow 1$ очевидны.
+    Докажем, что $2 \Rightarrow 3$.
+    Непрерывность $A$ означает, что
+    \[ \forall \varepsilon > 0 \; \exists \delta > 0 \; \forall x \in X: \; \norm{x} <
+    \delta \rightarrow \norm{Ax} < \varepsilon. \]
+    Зафиксируем некоторый $\varepsilon > 0$ и соответствующий ему $\delta$.
+    Тогда для любого $x \in X$, $\norm{x} \leq
+    1$, справедливо
+    \[ \norm{Ax} = \frac{2}{\delta} \norm{A\left( \frac{\delta}{2} x \right)}
+    \leq \frac{2\varepsilon}{\delta}. \]
+    Переходя в неравенстве к верхней грани, получаем, что
+    \[ \sup_{\norm{x} \leq 1}\norm{Ax} \leq \frac{2\varepsilon}{\delta}, \]
+    что и означает ограниченность оператора $A$.
+
+    Импликация $3 \Rightarrow 4$ проверяется непосредственно: если $A$ ---
+    ограниченный оператор, $x_1, x_2 \in X$, то
+    \[ \norm{Ax_1 - Ax_2} = \norm{A(x_1 - x_2)} \leq \norm{A} \norm{x_1 - x_2}.
+    \]
+\end{proof}

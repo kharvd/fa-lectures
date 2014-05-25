@@ -1,0 +1,71 @@
+\ProvidesPackage{mytheorems}
+
+\usepackage[amsmath,thmmarks]{ntheorem}
+
+% Theorem, lemma, corollary
+\theoremheaderfont{\normalfont\bfseries} 
+\theoremseparator{.}
+\theoremsymbol{}
+\theorempreskip{0cm}
+\theorempostskip{0cm}
+\newtheorem{lemma}{\indent Лемма}[section]
+\newtheorem{theorem}{\indent Теорема}[section]
+
+\newcounter{TheoremCorollaryCounter}[theorem]
+\newcounter{LemmaCorollaryCounter}[lemma]
+\newtheorem{corollaryth}[TheoremCorollaryCounter]{\indent Следствие} % A theorem corollary
+\newtheorem{corollaryle}[LemmaCorollaryCounter]{\indent Следствие} % A lemma corollary
+
+% Definition
+\theoremindent0cm
+\theoremheaderfont{\normalfont\bfseries} 
+\theorembodyfont{\upshape}
+\theoremseparator{.}
+\theoremsymbol{}
+%\theoremprework{}
+%\theorempostwork{\vspace*{-0.4em}}
+\theorempreskip{0cm}
+\theorempostskip{0cm}
+\newtheorem{definition}{\indent Определение}[section]
+
+% Example
+\theoremindent0cm
+\theoremheaderfont{\normalfont\bfseries} 
+\theorembodyfont{\upshape}
+\theoremseparator{.}
+\theorempreskip{0cm}
+\theorempostskip{0cm}
+\theoremsymbol{\ensuremath{\diamondsuit}}
+\newtheorem{example}{\indent Пример}[section]
+
+% Proof
+\theoremindent0cm
+\theoremheaderfont{\normalfont\sc} 
+\theorembodyfont{\upshape}
+\theoremstyle{nonumberplain}
+\theoremseparator{.}
+\theorempreskip{0cm}
+\theorempostskip{0.5cm}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{\indent Доказательство}
+
+% Remark
+\theoremindent0cm
+\theoremheaderfont{\normalfont\bfseries} 
+\theorembodyfont{\upshape}
+\theoremseparator{.}
+\theorempreskip{0cm}
+\theorempostskip{0cm}
+\theoremsymbol{}
+\newtheorem{remark}{\indent Замечание}[section]
+
+% Proof with linebreak
+\theoremindent0cm
+\theoremheaderfont{\normalfont\sc} 
+\theorembodyfont{\upshape}
+\theoremstyle{nonumberbreak}
+\theoremseparator{.}
+\theorempreskip{0cm}
+\theorempostskip{0cm}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proofbreak}{\indent Доказательство}

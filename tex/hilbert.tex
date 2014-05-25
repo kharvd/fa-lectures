@@ -1,0 +1,441 @@
+\section{Гильбертовы пространства}
+\subsection{Начальные сведения}
+\begin{definition}
+    Линейное пространство $H$ над полем $\fieldk$ называется 
+    \emph{пространством со скалярным произведением},
+    если в нем задана функция $\langle \cdot, \cdot \rangle \colon H \times H
+    \to \fieldk$, такая что для всех $x, y, z \in H$ и $\alpha, \beta \in \fieldk$
+    справедливы следующие свойства:
+    \begin{enumerate}
+        \item $ \langle x, x \rangle = 0 \Leftrightarrow x = 0 $
+            (невырожденность);
+        \item $ \langle x, x \rangle \geq 0 $ (положительная определённость);
+        \item $ \langle \alpha x + \beta y, z \rangle = \alpha \langle x, z
+                \rangle + \beta \langle y, z \rangle $ (линейность по первому
+                аргументу);
+        \item $ \langle x, y \rangle = \overline{\langle y, x \rangle} $ (эрмитова
+            симметричность).
+    \end{enumerate}
+    Такая функция называется \emph{скалярным произведением}.
+\end{definition}
+
+Далее будем рассматривать только комплексные пространства со скалярным
+произведением.
+
+В пространстве со скалярным произведением можно ввести норму по формуле
+\begin{equation}\label{eq:hilbert_norm}
+    \norm{x} = \sqrt{\langle x, x \rangle}. 
+\end{equation}
+
+Неравенство треугольника следует из неравенства
+\begin{equation}\label{eq:schwarz}
+    \absv{\langle x, y \rangle} \leq \norm{x} \norm{y},
+\end{equation}
+которое называют \emph{неравенством Коши-Буняковского-Шварца} или просто
+неравенством Шварца.
+
+\begin{theorem}\label{th:cont}
+    Пусть $\menge{x_n}, \menge{y_n}$ --- последовательности из $H$,
+    причем $x_n \to x$, $y_n \to y$. Тогда $\langle x_n, y_n \rangle \to \langle
+    x, y \rangle$.
+\end{theorem}
+
+\begin{proof}
+    Используем неравенство Шварца:
+    \begin{multline*}
+        \absv{\langle x_n , y_n \rangle - \langle x, y \rangle} = \absv{\langle
+            x_n, y_n \rangle - \langle x_n, y \rangle + \langle x_n, y \rangle -
+        \langle x, y \rangle} \leq \\ \leq \absv{\langle x_n, y_n - y \rangle} +
+        \absv{\langle x_n - x, y \rangle} \leq \\ \leq \norm{x_n}\norm{y_n - y} +
+        \norm{x_n - x}\norm{y} \to 0, \quad n \to \infty
+    \end{multline*}
+\end{proof}
+
+\begin{definition}
+    Если пространство со скалярным произведением полно по норме, определённой
+    равенством \eqref{eq:hilbert_norm}, то оно
+    называется \emph{гильбертовым пространством}.
+\end{definition}
+
+\begin{example}
+    Лебегово пространство $L^2(E, \mu)$ является гильбертовым пространством 
+    со скалярным произведением, определённым по формуле
+    \[ \langle f, g \rangle = \int_E f(x) \overline{g(x)} \dd \mu(x). \]
+    Существование этого интеграла следует из неравенства
+    \[ \absv{f(x)\overline{g(x)}} \leq \frac{\absv{f(x)}^2 + \absv{g(x)}^2}{2}.
+    \]
+\end{example}
+
+\begin{example}
+    В частности, гильбертовым пространством является пространство суммируемых с
+    квадратом последовательностей $\ell^2$. Скалярное произведение задаётся
+    формулой
+    \[ \langle x, y \rangle = \sum_{k=1}^\infty x_n \overline{y_n}. \]
+    Сходимоть ряда обеспечивается аналогичной оценкой.
+\end{example}
+
+\begin{definition}
+    Векторы $x, y \in H$ называются \emph{ортогональными}, если $\langle x, y \rangle =
+    0$. При этом пишут $x \perp y$.
+\end{definition}
+
+\begin{definition}
+    Пусть $M \subset H$ --- множество из $H$. Тогда говорят, что вектор
+    $x \in H$ \emph{ортогонален} $M$, если $x$ ортогонален любому вектору $m \in
+    M$ (в этом случае используется обозначение $x \perp M$).
+\end{definition}
+
+\begin{theorem}
+    Для всех векторов $x, y \in H$ выполняется тождество параллелограмма:
+    \[ \norm{x + y}^2 + \norm{x - y}^2 = 2\norm{x}^2 + 2\norm{y}^2. \]
+\end{theorem}
+
+\begin{proof}
+    Доказывается элементарными преобразованиями.
+\end{proof}
+
+\subsection{Теорема об ортогональном дополнении}
+\begin{definition}
+    Множество $A \subset X$ называется \emph{выпуклым}, если для любых векторов $a, b
+    \in A$ векторы вида $(1-t) a + t b, t \in [0, 1]$ также лежат в $A$.
+\end{definition}
+
+Очевидно, всякое подпространство в нормированном пространстве является выпуклым
+множеством.
+
+\begin{theorem}[о наилучшем приближении]
+    Пусть $A \subset H$ --- непустое выпуклое замкнутое множество в гильбертовом пространстве $H$.
+    Тогда для любого $x \in H \setminus A$ найдётся единственный вектор $a_0 \in
+    A$ такой, что
+    \[ \norm{x - a_0} = \inf_{a \in A} \norm{x - a}. \]
+    Иначе говоря, в $A$ найдется вектор $a_0$, который находится от $x$ на наименьшем
+    возможном расстоянии. Такой вектор $a_0$ называется элементом наилучшего
+    приближения вектора $x$ в множестве $A$.
+\end{theorem}
+
+\begin{proof}
+    По определению нижней грани, существует такая последовательность $\menge{a_n}$
+    элементов из $A$, что 
+    \[d_n = \norm{x - a_n} \to \inf_{a\in A} \norm{x - a} = d.\]
+    Покажем, что эта последовательность фундаментальна.
+
+    По тождеству параллелограмма получаем:
+    \begin{multline*}
+        \norm{(a_n - x) + (a_m - x)}^2 + \norm{(a_n-x)-(a_m-x)}^2 = \\ =
+        2\left(\norm{a_n-x}^2+\norm{a_m-x}^2\right). 
+    \end{multline*}
+
+    Заметим, что правая часть равенства стремится к $4d^2$ при стремлении $n$ и
+    $m$ к бесконечности. Разделим обе части равенства на $4$:
+    \begin{multline*}
+        \frac{1}{4}\left(\norm{(a_n - x) + (a_m - x)}^2 +
+        \norm{(a_n-x)-(a_m-x)}^2\right) = \\ =
+        \frac{1}{2}\left(\norm{a_n-x}^2+\norm{a_m-x}^2\right). 
+    \end{multline*}
+
+    После преобразований получаем:
+    \[
+        \norm{\frac{a_n+a_m}{2}-x}^2+\frac{\norm{a_n-a_m}^2}{4} =
+        \frac{1}{2}\left(\norm{a_n-x}^2+\norm{a_m-x}^2\right).
+    \]
+
+    Поскольку множество $A$ выпукло, вектор $(a_n+a_m)/2$ принадлежит
+    $A$, а значит, в силу определения нижней грани, справедлива оценка
+    \[ \norm{\frac{a_n+a_m}{2}-x}^2 \geq d^2. \]
+
+    Тогда
+    \begin{multline*}
+        \frac{\norm{a_n-a_m}^2}{4} =
+        \frac{1}{2}\left(\norm{a_n-x}^2+\norm{a_m-x}^2\right) -
+        \norm{\frac{a_n+a_m}{2}-x}^2 \leq \\ \leq
+        \frac{1}{2}\left(\norm{a_n-x}^2+\norm{a_m-x}^2\right) - d^2.
+    \end{multline*}
+
+    Правая часть неравенства стремится к нулю, а это значит, что
+    $\norm{a_n-a_m}$ также стремится к нулю, что и означает фундаментальность
+    последовательности $\menge{a_n}$.
+
+    Поскольку пространство полно, существует вектор $a_0 =
+    \lim\limits_{n\to \infty} a_n$. В силу замкнутости множества $A$ этот вектор также
+    лежит в $A$. При этом
+    \[ \norm{x-a_0} \leq \norm{x-a_n} + \norm{a_n-a_0} \to d, \quad n \to
+    \infty, \]
+    то есть $\norm{x - a_0} = d$, что и означает, что $a_0$ является элементом
+    наилучшего приближения $x$ в $A$.
+
+    Покажем, что других векторов наилучшего приближения в $A$ нет. Пусть $a_0'
+    \in A$ и $\norm{a_0' - x} = d$. Тогда, снова используя тождество
+    параллелограмма, получаем
+    \[ 4 \norm{x - \frac{a_0-a_0'}{2}}^2 + \norm{a_0 - a_0'}^2 = 2 \norm{x -
+    a_0}^2 + 2 \norm{x - a_0'}^2 = 4d^2.\]
+
+    Первый квадрат нормы не меньше $4d^2$, откуда следует, что второй не
+    превосходит нуля, а значит
+    \[ \norm{a_0-a_0'}^2 = 0, \]
+    то есть $a_0 = a_0'$.
+\end{proof}
+
+\begin{definition}
+    Пусть $M \subset H$ --- подпространство из $H$. Вектор $a \in M$ называется
+    \emph{проекцией} вектора $x \in H$ на $M$ если $x - a \perp M$, то есть для всех $m
+    \in M$ выполняется равенство
+    \[ \langle x - a, m \rangle = 0. \]
+\end{definition}
+
+\begin{theorem}\label{th:projection}
+    Если $M \subset H$ --- замкнутое подпространство, $x \in H \setminus M$,
+    то тогда вектор $a \in M$ является проекцией $x$ на $M$ тогда и только тогда, 
+    когда $a$ --- элемент наилучшего приближения $x$ в $M$.
+\end{theorem}
+
+\begin{proofbreak}
+    \dindent \textbf{Необходимость:}
+
+    Пусть $x - a \perp M$. Тогда по теореме Пифагора для любого $m \in M$
+    справедливо равенство
+    \[ \norm{x - m}^2 = \norm{x - a}^2 + \norm{a - m}^2. \]
+    Значит,
+    \[ \inf_{m \in M} \norm{x - m} = \norm{x - a},\]
+    откуда и следует, что $a$ --- элемент наилучшего приближения $x$ в $M$.
+
+    \textbf{Достаточность:}
+
+    Пусть $a \in M$ --- элемент наилучшего приближения $x$ в $M$, то есть
+    \[ \inf_{m \in M} \norm{x - m} = \norm{x - a} = d.\]
+    Покажем, что для любого $m \in M$ выполнено равенство $\langle x - a, m
+    \rangle = 0$.
+
+    Обозначим $x - a = z$ и пусть $t \in \fieldr$. Тогда
+    \begin{multline*}
+        \norm{x - (a + tm)}^2 = \norm{z - tm}^2 = \langle z - tm, z - tm \rangle
+        = \\ = \norm{z}^2 - 2 t \Re \langle z, m \rangle + t^2 \norm{m}^2 = d^2
+        - 2 t \Re \langle z, m \rangle + t^2 \norm{m}^2.
+    \end{multline*}
+
+    Поскольку $a + tm \in M$, $\norm{x - (a+tm)}^2 \geq d^2$, откуда
+    \[ d^2 - 2 t \Re \langle z, m \rangle + t^2 \norm{m}^2 \geq d^2, \]
+    то есть при всех $t \in \fieldr$
+    \[ t^2 \norm{m}^2 - 2 t \Re \langle z, m \rangle \geq 0, \]
+    что возможно только в случае $\Re \langle z, m \rangle = 0$. 
+    
+    Взяв теперь вместо $t$ величину $it$, $t \in \fieldr$, можно аналогично
+    показать, что $\Im \langle z, m \rangle = 0$, что в совокупности даёт
+    \[ \langle z, m \rangle = 0, \]
+    то есть $x - a \perp M$.
+\end{proofbreak}
+
+Таким образом мы доказали, что для всякого замкнутого подпространства $M \in H$
+и вектора $x \in H\setminus M$ существует проекция $x$ на $M$, причём она совпадает с
+элементом наилучшего приближения $x$ в $M$.
+
+\begin{definition}
+    \emph{Ортогональным дополнением} множества $A$ из гильбертова пространства $H$ называется множество
+    \[ A^\perp = \menge{x \in H : x \perp A}. \]
+\end{definition}
+
+Из свойств скалярного произведения и теоремы \ref{th:cont} нетрудно видеть, 
+что $A^\perp$ --- замкнутое подпространство из $H$ для любого
+подмножества $A \subset H$.
+
+\begin{theorem}[об ортогональном дополнении]
+    Если $M$ --- замкнутое подпространство из $H$, то $H = M \oplus M^\perp$.
+\end{theorem}
+
+\begin{proof}
+    Покажем, что всякий вектор $x \in H$ можно представить в виде суммы векторов
+    из $M$ и $M^\perp$. Пусть $a$ --- элемент наилучшего приближения $x$ в $M$.
+    Тогда по предыдущей теореме $x - a \perp M$, то есть $x - a \in M^\perp$,
+    откуда получаем
+    \[ x = a + (x - a), \]
+    где $a \in M$, $x - a \in M^\perp$.
+
+    Единственность такого представления обеспечивается тем фактом, что
+    \[ M \cap M^\perp = \menge{0}. \]
+\end{proof}
+
+\subsection{Базис в гильбертовом пространстве}
+
+\begin{definition}
+    Банахово пространство $X$ называется \emph{сепарабельным}, если существует такое
+    счетное множество $M \subset X$, что $\overline{M} = X$, то есть, как еще говорят, $M$
+    всюду плотно в $X$.
+\end{definition}
+
+\begin{definition}
+    Множество $M \subset H$ называется \emph{ортонормированным}, если для всех $x, y \in M$
+    \begin{enumerate}
+        \item $ \norm{x} = 1; $
+        \item $ x \neq y \Leftrightarrow \langle x, y \rangle = 0. $
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}     
+В сепарабельном гильбертовом пространстве всякое ортонормированное множество не
+более чем счетно.
+\end{lemma}
+
+\begin{proof}
+    Пусть $E$ --- ортонормированное множество в сепарабельном гильбертовом пространстве $H$.
+    Тогда для любых векторов $e_1$, $e_2$ из $F$ справедливо (проверяется непосредственно):
+    \[ \norm{e_1 - e_2} = \sqrt{2}. \]
+
+    Поскольку $H$ сепарабельно, существует счетное множество $F = \menge{f_k : k \in \mathbb N}$,
+    такое что для любого $e \in E$ найдется $f \in F$, что $\norm{e - f} < \sqrt{2}/2$.
+    Но тогда, если $\norm{e_1 - f} < \sqrt{2}/2$, то (из неравенства треугольника)
+    \[ \norm{e_2 - f} \geq \norm{e_1-e_2} - \norm{e_1 - f} > \frac{\sqrt{2}}{2}, \]
+    то есть двум разным $e_1$ и $e_2$ не может соответствовать один и тот же $f$ с вышеуказанным свойством, то есть существует инъективное отображение $E$ в $F$.
+    Из этого следует, что множество $F$ имеет мощность, не меньшую чем множество $E$, то есть $E$ --- не более, чем счетно.
+\end{proof}
+
+\begin{lemma}\label{le:series}
+Пусть $\menge{e_n : n \in \mathbb N}$ --- ортогональная последовательность векторов из $H$.
+Тогда следующие условия эквивалентны:
+\begin{enumerate}
+    \item $\sum\limits_{n=1}^\infty e_n$ сходится;
+    \item $\sum\limits_{n=1}^\infty \norm{e_n}^2$ сходится
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    По теореме Пифагора
+    \[ \norm{\sum_{k = m+1}^n e_k}^2 = \sum_{k=m+1}^n \norm{e_k}^2. \]
+    Из этого равенства и полноты пространства утверждение теоремы следует немедленно.
+\end{proof}
+
+Далее $H$ --- сепарабельное гильбертово пространство.
+\begin{definition}
+    Последовательность $\menge{e_n}$ называется \emph{ортонормированным базисом} (Шаудера) в $H$, если выполнены следующие условия:
+    \begin{enumerate}
+        \item Элементы последовательности $\menge{e_n}$ образуют ортонормированное множество;
+        \item Если $a \perp e_k$ для всех $k \in \mathbb N$, то $a = 0$ (свойство полноты).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Пусть $\menge{e_n}$ --- ортонормированный базис в~$H$. Тогда \emph{рядом Фурье} вектора $x \in H$ называется ряд 
+    \[ \sum\limits_{k=1}^\infty \langle x, e_k \rangle e_k. \]
+\end{definition}
+
+\begin{theorem}\label{th:fourier}
+    Для любого вектора $x\in H$ ряд Фурье сходится, причем сходится к вектору $x$.
+\end{theorem}
+
+\begin{proof}
+    По лемме \ref{le:series} ряд Фурье сходится в точности тогда, когда сходится ряд
+    $\sum\limits_{k=1}^\infty \absv{\langle x, e_k \rangle}^2$. По неравенству Бесселя (см. <<Лекции по алгебре>>, параграф 17)
+    \[ \norm{\sum_{k=1}^n \langle x, e_k \rangle e_k}^2 = \sum_{k=1}^n \absv{\langle x, e_k \rangle}^2 \leq \norm{x}^2, \]
+    откуда получаем, что ряд Фурье сходится (последовательность частичных сумм ограничена).
+    Обозначим через $y$ сумму этого ряда.
+
+    Покажем, что $x = y$:
+    \begin{multline*}
+         \langle x - y, e_j \rangle = 
+            \langle x - \sum_{k=1}^\infty \langle x, e_k \rangle e_k, e_j \rangle = \\ =
+            \langle x, e_j \rangle - \sum_{k=1}^\infty \langle x, e_k \rangle 
+                \langle e_k, e_j \rangle =
+                \langle x, e_j \rangle - \langle x, e_j \rangle = 0.
+    \end{multline*}
+
+    В силу свойства полноты базиса, $x - y = 0$. Дальнейшее очевидно.
+\end{proof}
+
+\begin{corollaryth}[равенство Парсеваля]
+    Для любого вектора $x\in H$
+    \[ \norm{x}^2 = \sum_{k=1}^\infty \absv{\langle x, e_k \rangle}^2. \]
+\end{corollaryth}
+
+\begin{theorem}\label{th:basis}
+    Для всякого бесконечномерного сепарабельного\\гильбертова пространства существует 
+    ортонормированный базис Шаудера.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\menge{y_n} \subset H$ --- счетное всюду плотное множество. Применяя процесс Грама-Шмидта (см. алгебру), получим не более чем счетное 
+    ортонормированное множество $M = \menge{e_n}$. Линейная оболочка $\linspan M$,
+    как нетрудно видеть, плотна в $H$ (в силу процесса Грама-Шмидта, всякий вектор $y_n$ 
+    выражается как конечная линейная комбинация векторов из $M$). 
+
+    Покажем, что $M$ обладает свойством полноты. Пусть 
+    \begin{equation}\label{eq:eq1}
+        \langle a, e_k \rangle = 0, \quad k \in \mathbb N.
+    \end{equation}
+    Рассмотрим последовательность подпространств
+    \[ E_n = \linspan \menge{e_1, \dotsc, e_n}. \] 
+    В силу условия $\overline{\linspan M} = H$,
+    \begin{equation}\label{eq:eq2}
+        d(a, E_n) \to 0,
+    \end{equation}    
+    где $d(a, E_n) = \inf\limits_{z \in E_n} \norm{a - z}$.
+
+    По теореме \ref{th:projection}, проекция 
+    $a_n = \sum\limits_{k=1}^n \langle a, e_k \rangle e_k$ 
+    вектора $a$ на $E_n$ есть элемент наилучшего приближения, то есть
+    \[ d(a, E_n) = \norm{a - a_n}. \]
+    Но $a_n = 0$ для всех $n$ в силу условия \eqref{eq:eq1}. Поэтому
+    \[ d(a, E_n) = \norm{a}, \]
+    откуда получаем, что $a = 0$ в силу \eqref{eq:eq2}.
+
+    Таким образом, $\menge{e_n}$ --- базис в $H$.
+\end{proof}
+
+\begin{definition}
+    Два нормированных пространства $X$ и $Y$ называют \emph{изометрически изоморфными}, если
+    существует такой биективный оператор $J \in L(X, Y)$, что для всех $x \in X$
+    \[ \norm{Jx} = \norm{x}. \]
+\end{definition}
+
+\begin{theorem}
+    Любое бесконечномерное сепарабельное гильбертово пространство над полем $\fieldk \in \menge{\fieldr, \fieldc}$
+    изометрически изоморфно пространству последовательностей $l^2 = l^2(\mathbb N, \fieldk)$.
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим произвольный ортонормиро-\\ванный базис $\menge{e_n}$ в $H$, существующий в силу теоремы \ref{th:basis}. 
+
+    Определим оператор $J \colon H \to l^2$ по правилу
+    \[ Jx = (\langle x, e_n \rangle)_{n=1}^\infty, \]
+    то есть $J$ ставит $x$ в соответствие последовательность его 
+    координат $\langle x, e_n \rangle$.
+
+    Инъективность следует из теоремы \ref{th:fourier}, сюръективность из леммы \ref{le:series}.
+    Изометричность следует из равенства Парсеваля.
+\end{proof}
+
+\begin{corollaryth}[теорема Фишера-Рисса]
+    Все сепарабельные гильбертовы пространства изометрически изоморфны между собой.
+\end{corollaryth}
+
+\subsection[Теорема Рисса]{Теорема Рисса об общем виде линейного\\функционала}
+\begin{theorem}[Рисса о представлении]
+    Каждый линейный ограниченный функционал $f \in H^*$ допускает единственное 
+    представление вида
+    \begin{equation}\label{eq:riesz}
+        f(x) = \langle x, a \rangle,
+    \end{equation}
+    где $a \in H$, причем
+    \[ \norm{f} = \norm{a}. \]
+\end{theorem}
+
+\begin{proofbreak}
+\begin{enumerate}
+    \item Если $a \in H$ --- фиксированный вектор, то \eqref{eq:riesz}, очевидно, задаёт линейный
+        функционал. Определим его норму:
+            \[ \absv{f(x)} = \absv{\langle x, a \rangle} \leq \norm{a}\norm{x} \quad x \in H; \]
+            \[ \norm{f} \leq \norm{a}; \]
+            \[ \absv{f(\frac{a}{\norm{a}})} = \langle a, \frac{a}{\norm{a}} \rangle = \norm{a}. \]
+        Таким образом
+        \[ \norm{f} = \norm{a} \]
+    \item Пусть $f \in H^*$. Будем считать, что $f \neq 0$, потому что в противном случае
+        достаточно взять $a = 0$. Тогда $M = \ker f \neq H$.
+
+        Возьмем ненулевой вектор $b \in \ker f$. Очевидно, что (проверяется непосредственно)
+        \[ f(x)b - f(b)x \in \ker f. \]
+        Тогда $f(x)b - f(b)x \perp b$. В таком случае
+        \[ \langle f(x)b - f(b) x, b \rangle = f(x) \langle b, b \rangle - 
+            f(b) \langle x, b \rangle = 0, \]
+        откуда получаем
+        \[ f(x) = \frac{f(b)\langle x, b \rangle}{\norm{b}^2} 
+            = \langle x, \frac{\overline{f(b)}}{\norm{b}^2}b \rangle = \langle x, a \rangle, \]
+        где $a = \displaystyle\frac{\overline{f(b)}}{\norm{b}^2}b$.
+\end{enumerate}
+\end{proofbreak}

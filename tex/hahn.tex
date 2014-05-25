@@ -1,0 +1,110 @@
+\section{Теорема Хана-Банаха}
+Далее $X$ --- линейное пространство над полем $\fieldk$.
+
+\begin{definition}
+    Отображение $p \colon X \to \fieldr$ называется \emph{полунормой}, если
+    для всех $x, y \in X$ и $\alpha \in \fieldk$
+    \begin{enumerate}
+        \item $p(x) \geq 0$;
+        \item $p(\alpha x) = \absv{\alpha}p(x)$;
+        \item $p(x + y) \leq p(x) + p(y)$.
+    \end{enumerate}
+\end{definition}
+
+Очевидно, что всякая полунорма является нормой.
+
+\begin{example}
+    Отображение $p \colon C[a, b] \to \fieldr$, 
+    $p(x) = \max\limits_{t \in [a, c]} \absv{x(t)}$, 
+    где $c < b$, является полунормой, но не является нормой.
+\end{example}
+
+\begin{definition}
+    \emph{Носителем} функции $f \colon \fieldr \to \fieldr$ называется множество
+    \[ \supp f = \overline{\menge{x \in \fieldr : f(x) \neq 0}}, \]
+    где черта, как обычно, означает замыкание.
+\end{definition}
+
+\begin{definition}
+    Функция $f \colon \fieldr \to \fieldr$ называется \emph{финитной}, 
+    если её носитель --- компактное множество в $\fieldr$.
+\end{definition}
+
+\begin{example}
+    Множество финитных бесконечно дифференцируемых функций 
+    $C_0^\infty(\fieldr)$ можно наделить семейством полунорм
+    по формуле
+    \[ p_{k,a,b} = \max_{t \in [a,b]} \absv{x^{(k)}(t)}, \quad k \geq 0. \]    
+\end{example}
+
+\begin{definition}
+    Пусть $M \subset X$ --- линейное подпространство, $f_0 \colon M \to \fieldk$ --- 
+    линейный функционал. Будем говорить, что линейный функционал $f \colon X \to \fieldk$
+    является \emph{продолжением} $f_0$ на $X$ если
+    \[ f(x) = f_0(x), \quad x \in M. \]
+\end{definition}
+
+\begin{theorem}[Хана-Банаха]
+    Пусть $X$ --- линейное прост-\\ранство над полем $\fieldk$, $p$ --- полунорма на $X$,
+    $M \subset X$ --- подпространство из $X$ и $f_0 \colon M \to \fieldk$ --- линейный
+    функционал со свойством
+    \[ \absv{f_0(x)} \leq p(x), \quad x \in M. \]
+    Тогда существует такой линейный функционал $f \colon X \to \fieldk$, что
+    \begin{enumerate}
+        \item $f$ --- продолжение $f_0$ на $X$;
+        \item $\absv{f(x)} \leq p(x)$, $x \in X$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{corollaryth}
+    Пусть $X$ --- линейное нормированное пространство. Тогда для всякого $x_0 \neq 0$ из $X$
+    существует такой линейный ограниченный функционал $f \in X^*$, что
+    \begin{enumerate}
+        \item $\absv{f(x_0)} = \norm{x_0} \neq 0$;
+        \item $\norm{f} = 1$.
+    \end{enumerate}
+\end{corollaryth}
+
+\begin{proof}
+    Пусть $M = \menge{\alpha x_0 : \alpha \in \fieldk}$. 
+
+    Функционал $f_0 \in M^*$ определим
+    по правилу
+    \[ f_0(\alpha x_0) = \alpha \norm{x_0}, \]
+    а в качестве полунормы $p$ возьмём норму:
+    \[ p(x) = \norm{x}, \quad x \in X. \]
+
+    По теореме Хана-Банаха существует продолжение $f_0$ на $X$, причем
+    \begin{enumerate}
+        \item $f(x_0) = f_0(x_0) = \norm{x_0} \neq 0$;
+        \item $\absv{f(x)} \leq \norm{x}$.
+    \end{enumerate}
+
+    В таком случае получаем, что $\norm{f} = 1$.
+\end{proof}
+
+Из этого следствия ясно видно, что если $X \neq \menge{0}$, то и $X^* \neq \menge{0}$.
+
+Рассмотрим пространство $(X^*)^*$, которое далее будем обозначать $X^{**}$. 
+Зафиксируем некоторый $x_0 \in X$ и определим функционал
+$\xi_{x_0} \in X^{**}$ по правилу
+\begin{equation}\label{eq:functional}
+    \xi_{x_0}(f) = f(x_0), \quad f \in X^*.
+\end{equation}
+Из следствия 1 получаем, что
+\[ \norm{\xi_{x_0}} = \norm{x_0}. \]
+
+Таким образом мы построили инъективное (проверьте!) отображение $\xi_\bullet \colon X \to X^{**}$.
+Такое отображение называется \emph{каноническим вложением} пространства $X$ в $X^{**}$.
+Заметим, что это линейный ограниченный оператор, сохраняющий норму.
+
+\begin{definition}
+    Банахово пространство $X$ называется \emph{рефлексивным}, если каждый 
+    функционал из $X^{**}$ представим в виде \eqref{eq:functional}. 
+    Иначе говоря, каноническое вложение осуществляет изометрический 
+    изоморфизм между $X$ и $X^{**}$.
+\end{definition}
+
+Примерами рефлексивных пространств являются лебеговы 
+пространства $L^p[a,b]$, $\ell^p$, где $p \in [1, \infty)$. 
+С другой стороны, пространства $\ell^\infty$ и $C[a, b]$ не рефлексивны.

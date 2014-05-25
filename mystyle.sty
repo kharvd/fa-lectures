@@ -1,0 +1,73 @@
+\ProvidesPackage{mystyle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{calc}
+\usepackage{framed}
+\usepackage{mytheorems}
+\usepackage{widebar}
+\usepackage{bbm}
+\usepackage{verbatim}
+\usepackage[hmarginratio=1:1,left=2cm,right=2cm,top=1.7cm,headsep=0.5cm,bottom=2cm]{geometry}
+
+%\setlength{\oddsidemargin}{5mm}
+%\setlength{\evensidemargin}{5mm}
+
+\pagestyle{fancy}
+%\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
+\fancyheadoffset[LE,RO]{0.5cm}
+\renewcommand{\sectionmark}[1]{\markright{\S\thesection. #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\rightmark}
+\fancypagestyle{plain}{%
+\fancyhead{} % get rid of headers
+\renewcommand{\headrulewidth}{1pt} % and the line
+}
+
+\allowdisplaybreaks[1]
+\hfuzz=0.6pt % Suppresses overfull hbox warnings up to 0.5pt
+\linespread{0.95}
+
+\numberwithin{equation}{section}
+
+%\titleformat{\section}{\large\bfseries}{\S\thesection.}{.5em}{}
+%\titleformat{\subsection}{\large\bfseries}{\thesubsection.}{.3em}{}
+
+% Convenient macros
+\renewcommand{\phi}{\varphi}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\ker}{\operatorname{Ker}}
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}}
+\DeclareMathOperator{\degr}{degr}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\fieldk}{\mathbb{K}}
+\newcommand{\fieldc}{\mathbb{C}}
+\newcommand{\fieldr}{\mathbb{R}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\polyset}[2][\fieldk]{\mathcal{P}_{#2}({#1})}
+\newcommand{\matr}[2][\fieldk]{\mathrm{Matr}_{#2}({#1})}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\absv}[1]{\left|#1\right|}
+\newcommand{\spectrum}[1]{\operatorname{\sigma}(#1)}
+\newcommand{\menge}[1]{\left\{#1\right\}} % Menge is German for set
+
+\newcommand{\dindent}{\indent\indent}
+
+%\renewcommand{\langle}{\left<}
+%\renewcommand{\rangle}{\right>}
