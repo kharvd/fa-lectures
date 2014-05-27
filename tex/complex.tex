@@ -1,0 +1,122 @@
+\section{Элементы теории функции комплексной переменной}
+Более подробную информацию можно найти, например, в книге Шабата Б. В. <<Введение
+в комплексный анализ>>.
+
+Рассмотрим функцию $F \colon E \subset \fieldr^2 \to \fieldr^2$. Её можно представить в виде
+\[ F(x, y) = (P(x, y), Q(x, y)), \]
+где $P, Q \colon E \to \fieldr$. Более того, эту функцию можно рассматривать как
+функцию $F \colon E \subset \fieldc \to \fieldc$:
+\[ F(x + iy) = P(x, y) + i Q(x, y). \]
+Пусть теперь $F$ дифференцируема в точке $x_0 \in E$ как отображение из $\fieldr^2$ в $\fieldr^2$.
+Исследуем, при каких условиях эта функция будет дифференцируема как отображение из $\fieldc$ в
+$\fieldc$. Заметим, что существуют функции, для которых это не выполняется. Примером может служить функция
+\[f\colon \fieldc \to \fieldc, \quad f(z) = \Re z. \]
+Если рассматривать эту функцию как отображение $f \colon \fieldr^2 \to \fieldr^2$, то легко видеть,
+что это линейный оператор:
+\[f(x_1, x_2) = x_1. \]
+То есть $f$ дифференцируемо в каждой точке из $\fieldr^2$. Однако если мы рассмотрим предел
+\begin{equation}\label{eq:diff}
+ \lim_{z\to 0} \frac{f(z) - f(0)}{z} = \lim_{z\to 0} \frac{\Re z}{z}
+\end{equation}
+при стремлении $z$ к нулю вдоль мнимой оси и вдоль действительной оси
+\[ \lim_{\substack{z\to 0\\ \Re z = 0}} \frac{\Re z}{z} = 0; \]
+\[ \lim_{\substack{z\to 0\\ \Im z = 0}} \frac{\Re z}{z} = \frac{z}{z} = 1. \]
+
+Таким образом предел \eqref{eq:diff} не существует, то есть $f \colon \fieldc \to \fieldc$ не
+дифференцируема.
+
+Как известно, если отображение $f \colon \fieldr^2 \to \fieldr^2$ дифференцируемо в точке 
+$x_0 = (x, y)$,
+то у него существуют частные производные первого порядка, и матрица Якоби в точке $x_0$ 
+есть матрица оператора $f'(x_0)$ в стандартном базисе. 
+
+Пусть $f(x, y) = (u(x, y), v(x, y))$.
+\[ f'(x_0) \sim 
+    \renewcommand{\arraystretch}{2}
+    \begin{pmatrix}
+    \dfrac{\partial u(x, y)}{\partial x} & \dfrac{\partial u(x, y)}{\partial y} \\
+    \dfrac{\partial v(x, y)}{\partial x} & \dfrac{\partial v(x, y)}{\partial y} 
+    \end{pmatrix}
+\]
+
+Следующее утверждение вытекает из представления комплексных чисел в виде матрицы и утверждения,
+что все линейные операторы в $\fieldc$ действуют по правилу $x \mapsto \alpha x$, 
+$\alpha \in \fieldc$.
+
+\begin{lemma}
+    Для того чтобы матрица $A = \begin{pmatrix}
+    a & b \\
+    c & d 
+    \end{pmatrix}$ с вещественными коэффициентами задавала
+    линейный оператор в комплексном линейном пространстве $\fieldc$, необходимо и достаточно, чтобы
+    \[ \left\{\begin{array}{l}
+        a = d \\
+        b = -c
+        \end{array}\right.\]
+\end{lemma}
+
+Непосредственно из леммы получаем
+\begin{theorem}[условия Коши-Римана]
+    Дифференцируемое \\ в точке $x_0 = (x, y) \in U \subset \fieldr^2$ 
+    отображение $f \colon U \subset \fieldr^2 \to \fieldr^2$,
+    $f(x, y) = (u(x, y), v(x, y))$
+    дифференцируемо как отображение $U \subset \fieldc \to \fieldc$ в том и только в том случае, если выполняются следующие условия (условия Коши-Римана):
+    \[ \left\{\begin{array}{l}
+        \dfrac{\partial u(x, y)}{\partial x} 
+            = \dfrac{\partial v(x, y)}{\partial y} \\
+        \dfrac{\partial u(x, y)}{\partial y}
+            = -\dfrac{\partial v(x, y)}{\partial x}
+        \end{array}\right. \]
+\end{theorem}
+
+\begin{definition}
+    Функция $f \colon U \subset \fieldc \to \fieldc$ называется \emph{аналитической} 
+    (чаще говорят \emph{голоморфной}) на открытом множестве $U$, если она дифференцируема 
+    (как функция в комплексном пространстве) 
+    в каждой точке множества $U$. 
+\end{definition}
+
+\begin{definition}
+    \emph{Путём} в $U \subset \fieldc$ называется непрерывное отображение
+    $\gamma \colon [0, 1] \to U$. Если это отображение является кусочно непрерывно
+    дифференцируемым, то его называют \emph{кусочно гладким путём}.
+\end{definition}
+
+\begin{definition}
+    \emph{Интегралом} от комплексной функции \\$f \colon U \subset \fieldc \to \fieldc$ \emph{вдоль
+        кусочно гладкого пути} $\gamma \colon [0, 1] \to U$ называется 
+    \[ \int_\gamma f(z) \dd z := \int_0^1 f(\gamma(t)) \gamma'(t) \dd t. \]
+\end{definition}
+
+Если $f(x + i y) = u(x, y) + i v(x, y)$, то интеграл можно записать в виде
+\begin{multline*}
+ \int_\gamma f(z) \dd z = \int_\gamma (u(x, y) + i v(x, y)) \dd (x + i y) =\\ = 
+   \int_\gamma u(x, y) \dd x - v(x, y) \dd y + i \int_\gamma v(x, y) \dd x + u(x, y) \dd y, 
+\end{multline*}
+где в правой части стоят известные из курса анализа криволинейные интегралы второго рода.
+
+\begin{theorem}[Коши]
+    Если $U$ --- односвязная область, граница которой есть простая замкнутая кривая, задаваемая
+    кусочно гладким путём (контуром) $\gamma$,
+    то для любой аналитической функции $f \colon U \subset \fieldc \to \fieldc$
+    справедливо равенство
+    \[ \int_\gamma f(z) \dd z = 0. \]
+\end{theorem}
+
+\begin{proof}
+    Вспомним известную из анализа формулу Грина:
+    \[ \int_\gamma P \dd x + Q \dd y = \iint_U \left(\dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\right) \dd x \dd y. \]
+    Тогда, применяя формулу Грина и условия Коши-Римана, получаем:
+    \begin{multline*}
+     \int_\gamma f(z) \dd z =  
+       \int_\gamma u(x, y) \dd x - v(x, y) \dd y + i \int_\gamma v(x, y) \dd x + u(x, y) \dd y = \\ = \iint_U \left(-\dfrac{\partial v}{\partial x} - \dfrac{\partial u}{\partial y}\right) \dd x \dd y + i \iint_U \left(\dfrac{\partial u}{\partial x} - \dfrac{\partial v}{\partial y}\right) \dd x \dd y = 0.
+    \end{multline*}
+\end{proof}
+
+\begin{theorem}
+    Пусть $f \colon U \subset \fieldc \to \fieldc$ --- аналитическая функция, определенная
+    в области $U$. Тогда для всех $z \in U$
+    \[ f(z) = \frac{1}{2 \pi i} \int_\gamma \frac{f(\lambda)}{\lambda - z} \dd \lambda, \]
+    где $\gamma$ --- контур, окружающий точку $z$, причем обход контура ведется против часовой
+    стрелки.
+\end{theorem}
