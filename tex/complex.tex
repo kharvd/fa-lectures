@@ -78,13 +78,13 @@ $\alpha \in \fieldc$.
 
 \begin{definition}
     \emph{Путём} в $U \subset \fieldc$ называется непрерывное отображение
-    $\gamma \colon [0, 1] \to U$. Если это отображение является кусочно непрерывно
+    $\gamma \colon [a, b] \to U$. Если это отображение является кусочно непрерывно
     дифференцируемым, то его называют \emph{кусочно гладким путём}.
 \end{definition}
 
 \begin{definition}
     \emph{Интегралом} от комплексной функции \\$f \colon U \subset \fieldc \to \fieldc$ \emph{вдоль
-        кусочно гладкого пути} $\gamma \colon [0, 1] \to U$ называется 
+        кусочно гладкого пути} $\gamma \colon [a, b] \to U$ называется 
     \[ \int_\gamma f(z) \dd z := \int_0^1 f(\gamma(t)) \gamma'(t) \dd t. \]
 \end{definition}
 
@@ -96,27 +96,68 @@ $\alpha \in \fieldc$.
 где в правой части стоят известные из курса анализа криволинейные интегралы второго рода.
 
 \begin{theorem}[Коши]
-    Если $U$ --- односвязная область, граница которой есть простая замкнутая кривая, задаваемая
-    кусочно гладким путём (контуром) $\gamma$,
-    то для любой аналитической функции $f \colon U \subset \fieldc \to \fieldc$
-    справедливо равенство
-    \[ \int_\gamma f(z) \dd z = 0. \]
+    Если функция $f$ является аналитической в односвязной области $U \subset \fieldc$,
+    то ее интеграл вдоль любого кусочно гладкого замкнутого 
+    пути $\gamma \colon [a, b] \to U$ равен нулю:
+    \[ \int_{\gamma} f(z) \dd z = 0. \]
 \end{theorem}
 
 \begin{proof}
     Вспомним известную из анализа формулу Грина:
-    \[ \int_\gamma P \dd x + Q \dd y = \iint_U \left(\dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\right) \dd x \dd y. \]
+    \[ \int_\gamma P \dd x + Q \dd y = \iint_D \left(\dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\right) \dd x \dd y, \]
+    где $D$ --- область, ограниченная путем $\gamma$.
     Тогда, применяя формулу Грина и условия Коши-Римана, получаем:
     \begin{multline*}
      \int_\gamma f(z) \dd z =  
-       \int_\gamma u(x, y) \dd x - v(x, y) \dd y + i \int_\gamma v(x, y) \dd x + u(x, y) \dd y = \\ = \iint_U \left(-\dfrac{\partial v}{\partial x} - \dfrac{\partial u}{\partial y}\right) \dd x \dd y + i \iint_U \left(\dfrac{\partial u}{\partial x} - \dfrac{\partial v}{\partial y}\right) \dd x \dd y = 0.
+       \int_\gamma u(x, y) \dd x - v(x, y) \dd y + i \int_\gamma v(x, y) \dd x + u(x, y) \dd y = \\ = \iint_D \left(-\dfrac{\partial v}{\partial x} - \dfrac{\partial u}{\partial y}\right) \dd x \dd y + i \iint_D \left(\dfrac{\partial u}{\partial x} - \dfrac{\partial v}{\partial y}\right) \dd x \dd y = 0.
     \end{multline*}
 \end{proof}
 
-\begin{theorem}[интегральная формула Коши]
+\begin{theorem}[интегральная формула Коши]\label{th:cauchy_formula}
     Пусть \\$f \colon U \subset \fieldc \to \fieldc$ --- аналитическая функция, определенная
-    в области $U$. Тогда для всех $z \in U$
+    в односвязной области $U$. Тогда для всех $z \in U$
     \[ f(z) = \frac{1}{2 \pi i} \int_\gamma \frac{f(\lambda)}{\lambda - z} \dd \lambda, \]
-    где $\gamma$ --- контур, окружающий точку $z$, причем обход контура ведется против часовой
-    стрелки.
+    где $\gamma$ --- граница области $U$, причем направление обхода контура положительно.
 \end{theorem}
+
+Из формулы Коши вытекает следующая теорема.
+\begin{theorem}\label{th:analytic}
+    Если $f \colon U \subset \fieldc \to \fieldc$ --- аналитическая функция и $z_0 \in U$,
+    то в любом круге $D = \menge{\absv{z-z_0} < R} \subset U$ эту функцию можно представить в
+    виде сходящегося степенного ряда
+    \[ f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n, \]
+    где 
+    \[ c_n = \dfrac{1}{2\pi i} \int_\gamma \dfrac{f(\lambda)}{(\lambda - z_0)^{n+1}} d \lambda,
+        \quad n = 0,\; 1,\; \dotsc, \]
+    а контур $\gamma \colon [a, b] \to D$ есть круг радиуса $r < R$ с центром в точке $z_0$. 
+\end{theorem}
+
+Эта теорема влечет за собой, что всякая дифференцируемая функция комплексной переменной
+дифференцируема бесконечное ч`исло раз, причем, поскольку
+из теоремы о почленном дифференцировании степенных рядов следует, что
+\[ c_n = \frac{f^{(n)}(z_0)}{n!}, \]
+получаем
+\[ f^{(n)}(z_0) = \dfrac{n!}{2\pi i} 
+    \int_\gamma \dfrac{f(z)}{(z - z_0)^{n+1}} d z. \]
+
+\begin{theorem}[единственности]
+    Если $f \colon U \subset \fieldc \to \fieldc$ аналитична на $U$ и
+    \[ f(z_n) = 0, \]
+    где $\menge{z_n}$ --- сходящаяся последовательность, то для всех $z \in U$
+    \[ f(z) = 0. \]
+\end{theorem}
+
+\begin{definition}
+    Функция $f \colon \fieldc \to \fieldc$ называется \emph{целой}, если
+    она является аналитической на всей комплексной плоскости.
+\end{definition}
+
+Всякую целую функцию можно представить в виде
+\[ f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} z^n. \]
+
+\begin{theorem}[Лиувилля]\label{th:liouville}
+    Если $f$ --- целая ограниченная\\функция, то она постоянна, т.е. $f(z) = c \in \fieldc$ для всех $z \in \fieldc$.
+\end{theorem}
+
+Результаты данного параграфа легко обобщаются на функции комплексной переменной, принимающие
+значение в некоторой банаховой алгебре.
