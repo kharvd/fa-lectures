@@ -2,6 +2,8 @@
 Определение обратного оператора и другие алгебраические аспекты теории можно найти
 в <<Лекциях по алгебре>>.
 
+Далее всюду $X$ --- комплексное банахово пространство.
+\subsection{Обратные операторы и их свойства}
 \begin{lemma}
     Если $A \in L(X)$ и $\norm{A} < 1$, то оператор $I - A$ обратим, а обратный задается формулой
     \[ (I - A)^{-1} = \sum_{n = 0}^\infty A^n, \]
@@ -65,8 +67,8 @@ $Ax_n \to y \in X$, предел $x$ лежит в $D(A)$ и $y = Ax$.
     Пусть $A \in L(X)$, $x_n \to x_0$, $Ax_n \to y_0$. В силу непрерывности $A$, $Ax_n \to Ax_0$, значит, в силу единственности предела последовательности, $Ax_0 = y_0$.
 \end{proof}
 
-\begin{theorem}[Банаха о замкнутом графике]
-    Пусть \\$A \colon X \to X$ --- замкнутый линейный оператор, определенный на всем
+\begin{theorem}[Банаха о замкнутом графике]\hfill\\
+    \indent Пусть $A \colon X \to X$ --- замкнутый линейный оператор, определенный на всем
     банаховом пространстве $X$. Тогда оператор $A$ ограничен.
 \end{theorem}
 
@@ -97,4 +99,108 @@ $X$ банахово, это всегда так.
     Пусть $Ax_n \to y_0$, а $x_n \to x_0$. Поскольку $A$ замкнут, $y_0 = Ax_0$, и
     $(y_0, x_0) = (Ax_0, x_0) \in \Gamma(A^{-1})$, то есть множество $\Gamma(A^{-1})$ замкнуто.
     Значит, оператор $A^{-1}$ замкнут, а по теореме о замкнутом графике он и ограничен.
+\end{proof}
+
+Если $A \colon D(A) \subset X \to X$ определен не на всем пространстве, то для него также можно 
+рассматривать условия (1, 2). Тогда будем называть обратным к оператору $A$ оператор 
+$A^{-1} \colon X \to X$, который удовлетворяет естественным условиям
+\[ AA^{-1} = I_X \]
+и
+\[ A^{-1}Ax = x \]
+для всех $x \in D(A)$. 
+Обратим внимание, что мы считаем $A^{-1}$ действующим из $X$ \emph{во всё пространство $X$}, 
+а не в $D(A)$.
+
+\begin{theorem}[Банаха об обратном операторе]\hfill\\
+    \indent Пусть $A \colon D(A) \subset X \to X$ --- замкнутый биективный линейный оператор, 
+    действующий в банаховом пространстве $X$. Тогда $A^{-1} \colon X \to X$ --- ограниченный
+    оператор. 
+\end{theorem}
+
+Доказательство аналогично предыдущему.
+
+\subsection{Спектр оператора}
+\begin{lemma}
+    Если $A \colon D(A) \subset X \to X$ замкнут, то и $A - \lambda I$ замкнут, 
+    где $\lambda \in \fieldc$, а $I \colon D(A) \subset X \to X$ --- тождественный оператор.
+\end{lemma}
+
+\begin{proof}
+    Пусть $A$ замкнут, $\menge{x_n} \subset D(A)$, $x_n \to x$, $(A- \lambda I)x_n \to y$.
+    Тогда
+    \begin{multline*}
+        \lim_{n\to \infty} Ax_n = \lim_{n\to \infty} (Ax_n - \lambda x_n + \lambda x_n) = 
+            \lim_{n\to \infty} (A - \lambda I)x_n + \\ + \lambda \lim_{n\to \infty} x_n 
+            = y + \lambda x.
+    \end{multline*}
+    Тогда, в силу замкнутости $A$,
+    \[ Ax = \lambda x + y \Rightarrow (A - \lambda I)x = y, \]
+    то есть $A - \lambda I$ также замкнут.
+\end{proof}
+
+\begin{definition}
+    Пусть $A \colon D(A) \subset X \to X$ --- замкнутый оператор. 
+    Будем называть число $\lambda \in \fieldc$ \emph{точкой спектра} оператора $A$, если оператор 
+    $ A - \lambda I \colon D(A) \subset X \to X $ необратим, то есть выполнено хотя бы одно из 
+    условий
+    \begin{enumerate}
+        \item $\ker (A - \lambda I) \neq \menge{0}$ --- оператор не инъективен.
+        \item $\im (A - \lambda I) \neq X$ --- оператор не сюръективен.
+    \end{enumerate}
+
+    Если же число $\lambda \in \fieldc$ не является точкой спектра, то его называют
+    \emph{регулярной точкой} оператора $A$.
+\end{definition}
+
+Заметим, что по теореме Банаха об обратном операторе, если число $\lambda$ --- регулярная точка
+$A$, то оператор $(A - \lambda I)^{-1}$ ограничен.
+
+\begin{definition}
+    Множество $\spectrum{A}$ точек спектра оператора $A$ называется \emph{спектром} оператора $A$.
+\end{definition}   
+
+\begin{definition}
+    Множество $\resset{A} = \fieldc \setminus \spectrum{A}$ регулярных точек оператора $A$
+    называется \emph{резольвентным множеством} оператора $A$.
+\end{definition}
+
+Спектр оператора принято разбивать на три взаимно непересекающиеся части:
+\begin{enumerate}
+    \item Дискретный спектр $\spectrum[d]{A}$ --- множество собственных значений оператора $A$, то есть такие $\lambda \in \fieldc$, что $\ker (A - \lambda I) \neq \menge{0}$.
+    \item Непрерывный спектр $\spectrum[c]{A}$ --- множество таких $\lambda \in \fieldc$, не
+    являющихся собственными значениями, что $\im (A - \lambda I) \neq X$, но 
+    $\overline{\im (A - \lambda I)} = X$.
+    \item Остаточный спектр $\spectrum[r]{A}$ --- множество точек спектра, не вошедших ни в
+    дискретный спектр, ни в непрерывный спектр.
+\end{enumerate}
+
+Ясно, что $\spectrum{A} = \spectrum[d]{A} \cup \spectrum[c]{A} \cup \spectrum[r]{A}$.
+
+\begin{definition}
+    Отображение $\resolvent{\bullet}{A} \colon \resset{A} \to L(X)$, действующее по правилу
+    \[ \resolvent{\lambda}{A} = (A - \lambda I)^{-1}, \]
+    называется \emph{резольвентой} оператора $A$.
+\end{definition}
+
+\begin{theorem}[тождество Гильберта]
+    Для любого линейного замкнутого оператора $A$ и любых чисел $\lambda, \mu \in \fieldc$ 
+    справедливо равенство
+    \[ \resolvent{\lambda}{A} - \resolvent{\mu}{A} 
+        = (\lambda - \mu) \resolvent{\lambda}{A}\resolvent{\mu}{A}. \]
+\end{theorem}
+
+\begin{proof}
+    Применяя к правой и левой частям равенства $A - \lambda I$ справа и $A - \mu I$ слева, получим
+    одинаковые выражения:
+    \[ (A - \lambda I)(\resolvent{\lambda}{A} - \resolvent{\mu}{A})(A - \mu I) = 
+    A - \mu I - A + \lambda I = (\lambda - \mu) I; \]
+    \[ (\lambda - \mu)(A - \lambda I)\resolvent{\lambda}{A}\resolvent{\mu}{A}(A - \mu I) = 
+    (\lambda - \mu) I, \]
+    то есть
+    \begin{multline*}
+        (A - \lambda I)(\resolvent{\lambda}{A} - \resolvent{\mu}{A})(A - \mu I) =\\=
+          (\lambda - \mu)(A - \lambda I)\resolvent{\lambda}{A}\resolvent{\mu}{A}(A - \mu I).
+    \end{multline*} 
+    Из биективности $A - \lambda I$ и $A - \mu I$ следует, что на них можно <<сократить>>
+    справа и слева. Тогда получаем требуемое равенство.
 \end{proof}
