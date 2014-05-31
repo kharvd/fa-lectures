@@ -83,7 +83,7 @@ $\alpha \in \fieldc$.
 \end{definition}
 
 \begin{definition}
-    \emph{Интегралом} от комплексной функции \\$f \colon U \subset \fieldc \to \fieldc$ \emph{вдоль
+    \emph{Интегралом} от функции $f \colon U \subset \fieldc \to \fieldc$ \emph{вдоль
         кусочно гладкого пути} $\gamma \colon [a, b] \to U$ называется 
     \[ \int_\gamma f(z) \dd z := \int_0^1 f(\gamma(t)) \gamma'(t) \dd t. \]
 \end{definition}
@@ -113,8 +113,8 @@ $\alpha \in \fieldc$.
     \end{multline*}
 \end{proof}
 
-\begin{theorem}[интегральная формула Коши]\label{th:cauchy_formula}
-    Пусть \\$f \colon U \subset \fieldc \to \fieldc$ --- аналитическая функция, определенная
+\begin{theorem}[интегральная формула Коши]\label{th:cauchy_formula}\hfill\\
+    \indentПусть $f \colon U \subset \fieldc \to \fieldc$ --- аналитическая функция, определенная
     в односвязной области $U$. Тогда для всех $z \in U$
     \[ f(z) = \frac{1}{2 \pi i} \int_\gamma \frac{f(\lambda)}{\lambda - z} \dd \lambda, \]
     где $\gamma$ --- граница области $U$, причем направление обхода контура положительно.
@@ -164,8 +164,11 @@ $\alpha \in \fieldc$.
 \[ f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} z^n. \]
 
 \begin{theorem}[Лиувилля]\label{th:liouville}
-    Если $f$ --- целая ограниченная\\функция, то она постоянна, т.е. $f(z) = c \in \fieldc$ для всех $z \in \fieldc$.
+    Если $f \colon \fieldc \to \fieldc$ --- целая ограниченная функция, то она постоянна, 
+    т.е. $f(z) = c \in \fieldc$ для всех $z \in \fieldc$.
 \end{theorem}
+
+\vspace{0.5cm}
 
 Результаты данного параграфа легко обобщаются на функции комплексной переменной, принимающие
 значение в некоторой банаховой алгебре.
