@@ -4,7 +4,7 @@
 
 Далее всюду $X$ --- комплексное банахово пространство.
 \subsection{Обратные операторы и их свойства}
-\begin{lemma}
+\begin{lemma}\label{le:neumann}
     Если $A \in L(X)$ и $\norm{A} < 1$, то оператор $I - A$ обратим, а обратный задается формулой
     \[ (I - A)^{-1} = \sum_{n = 0}^\infty A^n, \]
     причем ряд сходится абсолютно и
@@ -60,7 +60,7 @@ $Ax_n \to y \in X$, предел $x$ лежит в $D(A)$ и $y = Ax$.
 \end{example}
 
 \begin{theorem}
-    Всякий ограниченный оператор замкнут.
+    Всякий ограниченный оператор $A \in L(X)$ замкнут.
 \end{theorem}
 
 \begin{proof}
@@ -175,12 +175,61 @@ $A$, то оператор $(A - \lambda I)^{-1}$ ограничен.
 \end{enumerate}
 
 Ясно, что $\spectrum{A} = \spectrum[d]{A} \cup \spectrum[c]{A} \cup \spectrum[r]{A}$.
-
 \begin{definition}
     Отображение $\resolvent{\bullet}{A} \colon \resset{A} \to L(X)$, действующее по правилу
     \[ \resolvent{\lambda}{A} = (A - \lambda I)^{-1}, \]
     называется \emph{резольвентой} оператора $A$.
 \end{definition}
+
+\vspace{0.5cm}
+
+\begin{theorem}\label{th:resanalytic}
+    Для всякого замкнутого оператора $A$ множество $\resset{A}$ открыто.
+    Резольвента $\resolvent{\bullet}{A} \colon \resset{A} \to L(X)$ --- аналитическая функция
+    на $\resset{A}$.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\lambda_0 \in \resset{A}$, а $\lambda \in \fieldc$ таково, что
+    \[ \absv{\lambda - \lambda_0} < \frac{1}{\norm{\resolvent{\lambda_0}{A}}}. \]
+
+    Тогда представим оператор $A - \lambda I$ в следующем виде:
+    \[ A - \lambda I = A - \lambda_0 I + \lambda_0 I - \lambda I = 
+       (A - \lambda_0 I)(I - (\lambda - \lambda_0) \resolvent{\lambda_0}{A}). \]
+    Оператор $I - (\lambda - \lambda_0) \resolvent{\lambda_0}{A}$ обратим, поскольку 
+    (см. лемму \ref{le:neumann})
+    \[ \norm{(\lambda - \lambda_0) \resolvent{\lambda_0}{A})} < 1. \]
+    Так как $A - \lambda_0 I$ также обратим, то и $A - \lambda I$ обратим как произведение
+    обратимых операторов. Отсюда следует, что резольвентное множество открыто: вместе с каждой
+    точкой $\lambda_0$
+    в $\resset{A}$ входит открытый круг радиусом меньше $\norm{\resolvent{\lambda_0}{A}}^{-1}$ с 
+    центром в точке $\lambda_0$.
+
+    Оператор, обратный к $(I - (\lambda - \lambda_0) \resolvent{\lambda_0}{A})$ представляется
+    в виде
+    \[ (I - (\lambda - \lambda_0) \resolvent{\lambda_0}{A})^{-1} = 
+        \sum_{n=0}^\infty (\lambda - \lambda_0)^n \resolvent{\lambda_0}{A}^n. \]
+
+    Тогда 
+    \begin{multline*}
+        \resolvent{\lambda}{A} = 
+            (A - \lambda I)^{-1} = (I - (\lambda - \lambda_0) \resolvent{\lambda_0}{A})^{-1}
+             (A - \lambda_0 I)^{-1} =\\= \sum_{n=0}^\infty (\lambda - \lambda_0)^n 
+             \resolvent{\lambda_0}{A}^{n+1}.
+    \end{multline*}
+
+    Таким образом мы получили, что $\resolvent{\lambda}{A}$ в некоторой окрестности каждой точки
+    $\lambda_0 \in \resset{A}$
+    представляется в виде суммы степенного ряда с коэффициентами 
+    $c_n = \resolvent{\lambda_0}{A}^{n+1}$. Значит, по теореме \ref{th:tayloranalytic},
+    функция $\resolvent{\lambda}{A}$ аналитична на $\resset{A}$.
+\end{proof}
+
+\begin{corollaryth}
+    Для всякого замкнутого оператора $A$ множество $\spectrum{A}$ замкнуто.
+\end{corollaryth}
+
+\vspace{0.5cm}
 
 \begin{theorem}[тождество Гильберта]
     Для любого линейного замкнутого оператора $A$ и любых чисел $\lambda, \mu \in \fieldc$ 
@@ -204,3 +253,67 @@ $A$, то оператор $(A - \lambda I)^{-1}$ ограничен.
     Из биективности $A - \lambda I$ и $A - \mu I$ следует, что на них можно <<сократить>>
     справа и слева. Тогда получаем требуемое равенство.
 \end{proof}
+
+\begin{corollaryth}
+    Операторы $\resolvent{\lambda}{A}$ и $\resolvent{\mu}{A}$ перестановочны.
+\end{corollaryth}
+
+\vspace{0.5cm}
+
+\begin{theorem}[о спектре ограниченного оператора]\label{th:boundedspectrum}\hfill\\
+    \indent Пусть $A \in L(X)$ --- ограниченный оператор, действующий в банаховом пространстве $X$.
+    Тогда его спектр $\spectrum{A}$ есть непустое компактное множество в $\fieldc$.
+\end{theorem}
+
+\begin{proof}
+    Сначала покажем, что $\spectrum{A}$ --- компактное множество. Как известно из анализа,
+    множество в евклидовом пространстве компактно тогда и только тогда, когда оно замкнуто
+    и ограничено. Замкнутость спектра следует из предыдущей теоремы. Докажем ограниченность.
+
+    Пусть $\absv{\lambda} > \norm{A} \geq 0$. Тогда
+    \[ A - \lambda I = -\lambda(I - \lambda^{-1} A). \]
+    Оператор $(I - \lambda^{-1} A)$ обратим, поскольку 
+    \[ \norm{\lambda^{-1} A} = \frac{\norm{A}}{\absv{\lambda}} < 1. \]
+    Тогда и $A - \lambda I$ обратим. Отсюда получаем, что спектр оператора
+    $A$ лежит внутри круга радиуса $\norm{A}$ и с центром в нуле, то есть $\spectrum{A}$ --- 
+    ограниченное множество и, в силу замкнутости, компактное.
+
+    Покажем, что $\spectrum{A}$ непустое множество. Предположим противное: пусть 
+    $\resset{A} = \fieldc$ и $\absv{\lambda} > \norm{A}$. Тогда
+    при таких $\lambda$ резольвента представляется в виде
+    \[ \resolvent{\lambda}{A} = -\sum_{n=0}^\infty \frac{A^n}{\lambda^{n+1}}. \]
+    При этом для нормы резольвенты справедлива оценка
+    \begin{multline*}
+        \norm{\resolvent{\lambda}{A}} \leq 
+            \sum_{n=0}^\infty \frac{\norm{A}^n}{\absv{\lambda}^{n+1}} =
+            \frac{1}{\absv{\lambda}}\frac{1}{1-\dfrac{\norm{A}}{\absv{\lambda}}}
+            = \\ = \frac{1}{\absv{\lambda}-\norm{A}} 
+            \to 0 \text{ при } \lambda \to \infty.
+    \end{multline*}
+
+    То есть при $\lambda \to \infty$ норма $\norm{\resolvent{\lambda}{A}}$ стремится к нулю.
+
+    При этом, по теореме \ref{th:resanalytic}, резольвента является аналитической функцией на 
+    $\resset{A} = \fieldc$, то есть в нашем случае резольвента оказывается целой ограниченной
+    функцией (ограниченность следует из стремления к нулю на бесконечности и непрерывности).
+    Поэтому, по теореме Лиувилля, $\resolvent{\lambda}{A} = \mathbf{0} \in L(X)$ для всех 
+    $\lambda \in \fieldc$, что невозможно. Получили противоречие. Значит спектр оператора $A$ 
+    непуст.
+\end{proof}
+
+\begin{definition}
+    \emph{Спектральным радиусом} линейного ограниченного оператора $A \in L(X)$ называется величина
+    \[ r(A) = \max_{\lambda \in \spectrum{A}} \absv{\lambda}. \]
+\end{definition}
+
+Спектральный радиус корректно определен в виду компактности и непустоты спектра $A$.
+Из доказательства теоремы \ref{th:boundedspectrum} видно, что
+\[ r(A) \leq \norm{A}, \]
+поскольку, если $\absv{\lambda} > \norm{A}$, то оператор $A- \lambda I$ обратим.
+
+\begin{theorem}[формула Бёрлинга-Гельфанда]
+    Пусть $A \in L(X)$. Тогда для спектрального радиуса оператора $A$ справедлива формула
+    \[ r(A) = \lim_{n\to \infty} \sqrt[n]{\norm{A^n}}. \]
+\end{theorem}
+
+\vspace{0.5cm}
