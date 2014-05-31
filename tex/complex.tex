@@ -140,6 +140,14 @@ $\alpha \in \fieldc$.
 \[ f^{(n)}(z_0) = \dfrac{n!}{2\pi i} 
     \int_\gamma \dfrac{f(z)}{(z - z_0)^{n+1}} d z. \]
 
+Справедлива также и обратная теорема.
+\begin{theorem}\label{th:tayloranalytic}
+    Если $z_0 \in \fieldc$ и ряд
+    \[ f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n \]
+    сходится при $\absv{z-z_0} < R$,
+    то функция $f$ является аналитической в круге $\absv{z - z_0} < R$.
+\end{theorem}
+
 \begin{theorem}[единственности]
     Если $f \colon U \subset \fieldc \to \fieldc$ аналитична на $U$ и
     \[ f(z_n) = 0, \]
