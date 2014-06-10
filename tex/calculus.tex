@@ -1,0 +1,103 @@
+\section{Элементы функционального исчисления операторов}
+\subsection{Операторное исчисление}
+Далее $X$ --- комплексное банахово пространство. Обозначим символом
+$\mathcal F(\fieldc)$ алгебру целых функций $f \colon \fieldc \to \fieldc$.
+Пусть $A \in L(X)$, $f \in \mathcal F(\fieldc)$, а $f$ разлагается в ряд
+\[ f(\lambda) = \sum_{n=0}^\infty a_n \lambda^n. \]
+Определим отображение $\Phi_A \colon \mathcal F(\fieldc) \to L(X)$ следующим образом:
+\[ \Phi_A(f) = f(A) := \sum_{n=0}^\infty a_n A^n. \]
+Можно показать, что ряд сходится, а отображение $\Phi_A$ является гомоморфизмом алгебр.
+
+Отображение $\Phi_A$ называется \emph{целым исчислением} оператора $A$.
+
+\begin{example}
+    Экспонентой оператора $A \in L(X)$ назовём оператор $e^A$, определяемый формулой
+    \[ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}. \]
+\end{example}
+
+Рассмотрим более общий вид функционального исчисления операторов.
+
+Обозначим символом $\mathcal F(S)$ множество функций, аналитических на некотором открытом
+множестве, содержащем компакт $S \subset \fieldc$. Это множество является алгеброй с
+поточечными операциями сложения и умножения: если $f \colon U_1 \supset S \to \fieldc$,
+$g \colon U_2 \supset S \to \fieldc$, то $f + g$ и $fg$ действуют из $U_1 \cap U_2 \supset S$ в
+$\fieldc$ по правилу
+
+\[ \begin{aligned}
+    (f + g)(z) &= f(z) + g(z), \\
+    (fg)(z) &= f(z)g(z)
+\end{aligned} \quad\quad z \in U_1 \cap U_2. \]
+
+Вспомним интегральную формулу Коши:
+\[ f(z) = -\frac{1}{2\pi i} \int_{\gamma} \frac{f(\lambda)}{z - \lambda} \dd \lambda. \]
+
+Идея \emph{исчисления Данфорда} (еще говорят \emph{голоморфного функционального исчисления},
+\emph{операторного исчисления}) состоит в том, чтобы использовать интегральную формулу Коши для 
+определения значения функции от оператора.
+
+Пусть $A \in L(X)$. Определим отображение $\Psi_A \colon \mathcal F(\spectrum{A}) \to L(X)$ по правилу
+\[ \Psi_A(f) = f(A) 
+    := -\frac{1}{2\pi i} \int_{\gamma} f(\lambda) \resolvent{\lambda}{A} \dd \lambda, \]
+где контур $\gamma$ --- граница открытого множества $V \supset \spectrum{A}$, лежащего в множестве
+аналитичности функции $f$.
+
+Отображение $\Psi_A$ называется \emph{исчислением Данфорда} оператора $A$ или просто
+\emph{операторным исчислением}. Следующая теорема обосновывает корректность такого названия.
+
+\begin{theorem}
+    $\Psi_A$ является гомоморфизмом алгебр $\mathcal F(\spectrum{A})$ и $L(X)$, то есть для всех
+    $f, g \in \mathcal F(\spectrum{A})$ справедливо
+    \[ (f+g)(A) = f(A) + g(A), \]
+    \[ (fg)(A) = f(A)g(A). \]
+
+    Кроме того, если $f$ --- целая функция, то
+    \[ f(A) = \sum_{n=0}^\infty a_n A^n, \]
+    то есть целое исчисление и исчисление Данфорда совпадают для целых функций.
+\end{theorem}
+
+\begin{proof}
+    Первое свойство следует из линейности интеграла по контуру. Докажем второе свойство.    
+    Пусть $U_1$ и $U_2$ --- открытые множества, содержащие спектр, причем такие, что замыкание 
+    $U_1$ лежит в $U_2$, а замыкание $U_2$ лежит в общем множестве аналитичности функций $f$ и $g$.
+    Символами $\gamma_1$ и $\gamma_2$ обозначим контуры, обходящие границы $U_1$ и $U_2$ 
+    соответственно в положительном направлении обхода (так, чтобы внутренность множества 
+    оставалась слева). Тогда, применяя интегральную формулу Коши и тождество Гильберта, получим
+    \begin{align*}
+        f(A)&g(A) = \frac{1}{4 \pi^2}\int_{\gamma_1} f(\lambda) \resolvent{\lambda}{A} \dd \lambda
+        \cdot 
+        \int_{\gamma_2} f(\mu) \resolvent{\mu}{A} \dd \mu = \\[0.7em]
+        &= \frac{1}{4\pi^2} \int_{\gamma_1} \int_{\gamma_2} f(\lambda) g(\mu) 
+        \resolvent{\lambda}{A} \resolvent{\mu}{A} \dd \mu \dd \lambda = \\[0.7em]
+        &= \frac{1}{4\pi^2} \int_{\gamma_1} \int_{\gamma_2} f(\lambda) g(\mu) (\lambda - \mu)^{-1}
+        (\resolvent{\lambda}{A} - \resolvent{\mu}{A}) \dd \mu \dd \lambda = \\[0.7em]
+        &= \frac{1}{4\pi^2} \int_{\gamma_1} \int_{\gamma_2} f(\lambda) g(\mu) (\lambda - \mu)^{-1}
+        \resolvent{\lambda}{A} \dd \mu \dd \lambda - \\[0.7em]
+        &\quad- \frac{1}{4\pi^2} \int_{\gamma_1} \int_{\gamma_2} f(\lambda) g(\mu) (\lambda - \mu)^{-1}
+        \resolvent{\mu}{A} \dd \mu \dd \lambda = \\[0.7em]
+        &= -\frac{1}{2\pi i} \int_{\gamma_1} f(\lambda) \resolvent{\lambda}{A} \left( 
+        -\frac{1}{2\pi i} \int_{\gamma_2} \frac{g(\mu)}{\lambda - \mu} \dd \mu \right) 
+        \dd \lambda - \\[0.7em]
+        &\quad- \left(-\frac{1}{2\pi i} \right) \int_{\gamma_2} g(\mu) \resolvent{\mu}{A} 
+        \left( -\frac{1}{2\pi i} \int_{\gamma_1} \frac{f(\lambda)}{\lambda - \mu} \dd \lambda \right) 
+        \dd \mu = \\[0.7em]
+        &= -\frac{1}{2\pi i} \int_{\gamma_1} f(\lambda) \resolvent{\lambda}{A} \left( 
+        -\frac{1}{2\pi i} \int_{\gamma_2} \frac{g(\mu)}{\lambda - \mu} \dd \mu \right) 
+        \dd \lambda = \\[0.7em]
+        &= -\frac{1}{2\pi i} \int_{\gamma_1} f(\lambda) g(\lambda) \resolvent{\lambda}{A}
+        \dd \lambda = (fg)(A),
+    \end{align*}
+    где интеграл
+    \[ \int_{\gamma_1} \frac{f(\lambda)}{\lambda - \mu} \dd \lambda \]
+    равен нулю, поскольку $\mu$ лежит за пределами $U_1$ (на контуре $\gamma_2$), то есть функция
+    \[ h(\lambda) = \frac{f(\lambda)}{\lambda - \mu} \]
+    аналитична в области $U_1$ (знаменатель в ноль не обращается).
+
+    Третье свойство дано без доказательства.
+\end{proof}
+
+\begin{theorem}[Данфорда об отображении спектра]\hfill\\
+    \indent Пусть $A \in L(X)$, $f \in \mathcal F(\spectrum{A})$. Тогда
+    \[ \spectrum{f(A)} = f(\spectrum{A}) = \menge{f(\lambda) : \lambda \in \spectrum{A}}. \]
+\end{theorem}
+
+\subsection{Проекторы Рисса}
