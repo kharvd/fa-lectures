@@ -17,10 +17,10 @@ $\mathcal F(\fieldc)$ алгебру целых функций $f \colon \fieldc
 
 Рассмотрим более общий вид функционального исчисления операторов.
 
-Обозначим символом $\mathcal F(S)$ множество функций, аналитических на некотором открытом
-множестве, содержащем компакт $S \subset \fieldc$. Это множество является алгеброй с
-поточечными операциями сложения и умножения: если $f \colon U_1 \supset S \to \fieldc$,
-$g \colon U_2 \supset S \to \fieldc$, то $f + g$ и $fg$ действуют из $U_1 \cap U_2 \supset S$ в
+Обозначим символом $\mathcal F(A)$ множество функций, аналитических на некотором открытом
+множестве, содержащем спектр $\spectrum{A}$ оператора $A \in L(X)$. Это множество является алгеброй с
+поточечными операциями сложения и умножения: если $f \colon U_1 \supset \spectrum{A} \to \fieldc$,
+$g \colon U_2 \supset \spectrum{A} \to \fieldc$, то $f + g$ и $fg$ действуют из $U_1 \cap U_2 \supset \spectrum{A}$ в
 $\fieldc$ по правилу
 
 \[ \begin{aligned}
@@ -35,7 +35,7 @@ $\fieldc$ по правилу
 \emph{операторного исчисления}) состоит в том, чтобы использовать интегральную формулу Коши для 
 определения значения функции от оператора.
 
-Пусть $A \in L(X)$. Определим отображение $\Psi_A \colon \mathcal F(\spectrum{A}) \to L(X)$ по правилу
+Пусть $A \in L(X)$. Определим отображение $\Psi_A \colon \mathcal F(A) \to L(X)$ по правилу
 \[ \Psi_A(f) = f(A) 
     := -\frac{1}{2\pi i} \int_{\gamma} f(\lambda) \resolvent{\lambda}{A} \dd \lambda, \]
 где контур $\gamma$ --- граница открытого множества $V \supset \spectrum{A}$, лежащего в множестве
@@ -44,9 +44,9 @@ $\fieldc$ по правилу
 Отображение $\Psi_A$ называется \emph{исчислением Данфорда} оператора $A$ или просто
 \emph{операторным исчислением}. Следующая теорема обосновывает корректность такого названия.
 
-\begin{theorem}
-    $\Psi_A$ является гомоморфизмом алгебр $\mathcal F(\spectrum{A})$ и $L(X)$, то есть для всех
-    $f, g \in \mathcal F(\spectrum{A})$ справедливо
+\begin{theorem}\hfill\\
+    \indent Отображение $\Psi_A$ является гомоморфизмом алгебры $\mathcal F(A)$ в алгебру $L(X)$, то есть для всех
+    $f, g \in \mathcal F(A)$ справедливо
     \[ (f+g)(A) = f(A) + g(A), \]
     \[ (fg)(A) = f(A)g(A). \]
 
@@ -96,8 +96,58 @@ $\fieldc$ по правилу
 \end{proof}
 
 \begin{theorem}[Данфорда об отображении спектра]\hfill\\
-    \indent Пусть $A \in L(X)$, $f \in \mathcal F(\spectrum{A})$. Тогда
+    \indent Пусть $A \in L(X)$, $f \in \mathcal F(A)$. Тогда
     \[ \spectrum{f(A)} = f(\spectrum{A}) = \menge{f(\lambda) : \lambda \in \spectrum{A}}. \]
 \end{theorem}
 
 \subsection{Проекторы Рисса}
+\begin{theorem}
+Пусть спектр оператора $A \in L(X)$ представим в виде объединения двух непересекающихся
+замкнутых частей: $\spectrum{A} = \sigma_1 \cup \sigma_2$. Тогда существует разложение $X$
+в прямую сумму замкнутых подпространств $X = X_1 \oplus X_2$, причем пространства $X_1$ и $X_2$ 
+инвариантны относительно оператора $A$. Более того, если $A_k = A|_{X_k}$, $k=1,2$, то $\spectrum{A_1} = \sigma_1$ и
+$\spectrum{A_2} = \sigma_2$.
+\end{theorem}
+
+\begin{proof}
+    Определим функцию $f \colon U_1 \cup U_2 \to \fieldc$ по правилу
+    \[ f(\lambda) = 
+        \begin{cases}
+            1, & \lambda \in U_1, \\
+            0, & \lambda \in U_2,
+        \end{cases} \]
+    где $U_1$ и $U_2$ --- взаимно непересекающиеся открытые множества, содержащие $\sigma_1$ и 
+    $\sigma_2$ соответственно. Очевидно, что $f$ --- аналитическая функция: она дифференцируема
+    в каждой точке $U_1 \cup U_2$, то есть $f \in \mathcal F(A)$.
+    Значит можно определить оператор $f(A)$:
+    \begin{align*}
+        f(A) &= -\frac{1}{2\pi i} \int_{\gamma} f(\lambda) \resolvent{\lambda}{A} \dd \lambda 
+            = -\frac{1}{2\pi i} \int_{\gamma_1} f(\lambda) \resolvent{\lambda}{A} \dd \lambda - \\ 
+            &-\frac{1}{2\pi i} \int_{\gamma_2} f(\lambda) \resolvent{\lambda}{A} \dd \lambda =
+            -\frac{1}{2\pi i} \int_{\gamma_1} \resolvent{\lambda}{A} \dd \lambda,
+    \end{align*}
+    где $\gamma$ --- граница $U_1 \cup U_2$, являющаяся объединением $\gamma_k$ --- границ $U_k$, 
+    $k=1,2$.
+
+    Введем обозначение $P_1 = f(A)$. Покажем, что $P_1$ --- проектор. Поскольку 
+    $(f\cdot f)(\lambda) = (f(\lambda))^2 = f(\lambda)$ для всех $\lambda \in U_1 \cup U_2$, 
+    в силу определения гомоморфизма алгебр, получаем:
+    \[ P_1^2 = f(A)f(A) = (f \cdot f)(A) = f(A) = P_1. \]
+    Итак, $P_1$ в самом деле проектор.
+
+    Пусть $X_1 = \im P_1$, $X_2 = \ker P_1$. Из алгебры известно, что пространство $X$
+    раскладывается в прямую сумму $X_1$ и $X_2$. Покажем, что пространства $X_1$ и $X_2$ 
+    инвариантны относительно $A$. Для этого достаточно показать, что $AP_1 = P_1A$ (см. алгебру).
+    \begin{align*}
+        AP_1 &= -\frac{1}{2\pi i} \int_{\gamma_1} A \resolvent{\lambda}{A} \dd \lambda, \\
+        P_1A &= -\frac{1}{2\pi i} \int_{\gamma_1} \resolvent{\lambda}{A} A \dd \lambda.
+    \end{align*}
+
+    Легко показать, что для любого оператора $A \in L(X)$ и любого $\lambda \in \resset{A}$ 
+    справедливо равенство\footnote{Рассмотрите очевидное равенство $(A- \lambda I)A = 
+    A(A- \lambda I)$}
+    \[ A\resolvent{\lambda}{A} = \resolvent{\lambda}{A}A.\]
+    Отсюда получаем, что в самом деле пространства $X_1$ и $X_2$ инвариантны относительно $A$.
+    Значит можно определить сужения $A|_{X_1} = A_1 \in L(X_1)$, $A|_{X_2} = A_2 \in L(X_2)$.
+    Утверждение о спектре этих сужений оставим без доказательства.
+\end{proof}
