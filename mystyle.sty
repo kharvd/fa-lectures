@@ -5,7 +5,7 @@
 \usepackage[russian]{babel}
 \usepackage{mathtools}
 \usepackage{amssymb}
-\usepackage{graphicx}
+\usepackage[pdftex]{graphicx}
 \usepackage{setspace}
 \usepackage{indentfirst}
 \usepackage{fancyhdr}
@@ -17,6 +17,21 @@
 \usepackage{bbm}
 \usepackage{verbatim}
 \usepackage[hmarginratio=1:1,left=2cm,right=2cm,top=1.7cm,headsep=0.5cm,bottom=2cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={Конспект лекций по функциональному анализу},
+    pdfauthor={Баскаков А. Г.},
+    bookmarksnumbered=true,     
+    bookmarksopen=true,         
+    bookmarksopenlevel=3,       
+    colorlinks=true,       
+    allcolors=blue,     
+    pdfstartview=Fit,           
+    pdfpagemode=UseOutlines,    % this is the option you were lookin for
+    pdfpagelayout=TwoPageRight
+}
+\usepackage{hypcap}
+
 
 \allowdisplaybreaks
 
@@ -35,6 +50,8 @@
 \fancyhead{} % get rid of headers
 \renewcommand{\headrulewidth}{1pt} % and the line
 }
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \allowdisplaybreaks[1]
 \hfuzz=0.6pt % Suppresses overfull hbox warnings up to 0.5pt
