@@ -4,8 +4,8 @@
 \fieldc}$.
 
 \begin{definition}
-    Отображение $A \colon X \to Y$ называется \emph{линейным оператором}, действующим
-    из пространства $X$ в $Y$, если
+    Отображение $A \colon X \to Y$ из линейного пространства $X$ в линейное пространство $Y$
+    называется \emph{линейным оператором}, если
     \[ A(\alpha x_1 + \beta x_2) = \alpha Ax_1 + \beta Ax_2, \quad \forall x_1,
     x_2 \in X, \alpha, \beta \in \fieldk. \]
 \end{definition}
@@ -27,7 +27,7 @@
 \begin{example}
     Пусть $(\Omega, \mathcal F, \mu)$ --- пространство с мерой, $L^1(\Omega,
     \mu)$ --- банахово пространство классов эквивалентности суммируемых функций
-    на $\Omega$. Отображение $J_0 \colon L^1(\Omega, \mu) \to \fieldr$,
+    на~$\Omega$. Отображение $J_0 \colon L^1(\Omega, \mu) \to \fieldr$,
     определенное по правилу
     \[ J_0 x = \int_\Omega x \dd \mu, \]
     есть линейный функционал.
@@ -68,13 +68,13 @@
 Нетрудно видеть, что $\norm{Ax} \leq \norm{A}\norm{x}$ для всех $x \in X$.
 
 \begin{example}
-    Рассмотрим оператор умножения $A \colon \fieldc \to \fieldc$, $\\Ax = ax$,
+    Рассмотрим оператор умножения $A \colon \fieldc \to \fieldc$, $Ax = ax$,
     где $a \in \fieldc$. Если $\norm{x} = \absv{x} = 1$, то 
     \[ \norm{Ax} = \absv{ax} = \absv{a}. \]
     Таким образом $\norm{A} = \absv{a}$.
 \end{example}
 
-Множество всех линейных ограниченных операторов между \\ нормированными
+Множество всех линейных ограниченных операторов между нормированными
 пространствами $X$ и $Y$ будем обозначать $L(X, Y)$.
 
 \begin{theorem}
