@@ -70,6 +70,8 @@
     Пусть $f, g \colon U \subset X \to Y$ дифференцируемы в точке $x_0$. Тогда
     $\alpha f + \beta g$ также дифференцируемо в точке $x_0$, причем
     \[ (\alpha f + \beta g)'(x_0) = \alpha f'(x_0) + \beta g'(x_0). \]
+
+    При этом производная линейной комбинации функций есть линейная комбинация производных.
 \end{theorem}
 
 \begin{proof}
@@ -104,15 +106,15 @@
 \begin{theorem}
     Пусть $f \colon U \subset X \to Y$ дифференцируемо в точке $x_0 \in U$, а
     $g \colon V \subset Y \to Z$ дифференцируемо в точке $y_0 = f(x_0)$
-    и $f(U) \subset V$. Тогда отображение $h = g \circ f \colon U \subset X \to Z$
+    и $f(U) \subset V$. Тогда отображение $F = g \circ f \colon U \subset X \to Z$
     дифференцируемо в точке $x_0$ и
-    \[ h'(x_0) = g'(f(x_0)) f'(x_0) \in L(X, Z). \]
+    \[ F'(x_0) = g'(f(x_0)) f'(x_0) \in L(X, Z). \]
 \end{theorem}
 
 \begin{proof}
-    Рассмотрим приращение отображения $h$:
+    Рассмотрим приращение отображения $F$:
     \begin{multline*}
-        h(x) - h(x_0) = g(f(x)) - g(f(x_0)) = \\
+        F(x) - F(x_0) = g(f(x)) - g(f(x_0)) = \\
          = g'(f(x_0))(f(x) - f(x_0)) + o(\norm{f(x) - f(x_0)}) = \\
          = g'(f(x_0))(f'(x_0)(x - x_0) + o(\norm{x - x_0})) + o(\norm{f(x) - f(x_0)}) = \\
          = g'(f(x_0))f'(x_0)(x - x_0) +\\+ g'(f(x_0))o(\norm{x - x_0}) + o(\norm{f(x) - f(x_0)})
@@ -132,7 +134,7 @@
           + \frac{\varepsilon_2(h)\norm{f(x_0+h) - f(x_0)}}{\norm{h}} \to 0 \text{ при } h \to 0.
     \end{multline*}
     Таким образом
-    \[ h(x) - h(x_0) = g'(f(x_0))f'(x_0)(x - x_0) + o(\norm{x - x_0}) \text{ при } x \to x_0. \]
+    \[ F(x) - F(x_0) = g'(f(x_0))f'(x_0)(x - x_0) + o(\norm{x - x_0}) \text{ при } x \to x_0. \]
 \end{proof}
 
 См. <<Лекции по алгебре>> для определения полилинейного (билинейного) оператора.

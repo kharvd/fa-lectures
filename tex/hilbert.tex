@@ -166,7 +166,7 @@
     Покажем, что других векторов наилучшего приближения в $A$ нет. Пусть $a_0'
     \in A$ и $\norm{a_0' - x} = d$. Тогда, снова используя тождество
     параллелограмма, получаем
-    \[ 4 \norm{x - \frac{a_0-a_0'}{2}}^2 + \norm{a_0 - a_0'}^2 = 2 \norm{x -
+    \[ 4 \norm{x - \frac{a_0+a_0'}{2}}^2 + \norm{a_0 - a_0'}^2 = 2 \norm{x -
     a_0}^2 + 2 \norm{x - a_0'}^2 = 4d^2.\]
 
     Первый квадрат нормы не меньше $4d^2$, откуда следует, что второй не
@@ -422,20 +422,22 @@
         функционал. Определим его норму:
             \[ \absv{f(x)} = \absv{\langle x, a \rangle} \leq \norm{a}\norm{x} \quad x \in H; \]
             \[ \norm{f} \leq \norm{a}; \]
-            \[ \absv{f(\frac{a}{\norm{a}})} = \langle a, \frac{a}{\norm{a}} \rangle = \norm{a}. \]
+            \[ \absv{f\left(\frac{a}{\norm{a}}\right)} 
+                = \left\langle a, \frac{a}{\norm{a}} \right\rangle = \norm{a}. \]
         Таким образом
         \[ \norm{f} = \norm{a} \]
     \item Пусть $f \in H^*$. Будем считать, что $f \neq 0$, потому что в противном случае
         достаточно взять $a = 0$. Тогда $M = \ker f \neq H$.
 
-        Возьмем ненулевой вектор $b \in \ker f$. Очевидно, что (проверяется непосредственно)
+        Возьмем ненулевой вектор $b \in (\ker f)^\perp$. Очевидно, что (проверяется непосредственно)
         \[ f(x)b - f(b)x \in \ker f. \]
         Тогда $f(x)b - f(b)x \perp b$. В таком случае
         \[ \langle f(x)b - f(b) x, b \rangle = f(x) \langle b, b \rangle - 
             f(b) \langle x, b \rangle = 0, \]
         откуда получаем
         \[ f(x) = \frac{f(b)\langle x, b \rangle}{\norm{b}^2} 
-            = \langle x, \frac{\overline{f(b)}}{\norm{b}^2}b \rangle = \langle x, a \rangle, \]
+            = \left\langle x, \frac{\overline{f(b)}}{\norm{b}^2}b \right\rangle 
+                = \langle x, a \rangle, \]
         где $a = \displaystyle\frac{\overline{f(b)}}{\norm{b}^2}b$.
 \end{enumerate}
 \end{proofbreak}
